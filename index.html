@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Статистика звернень</title>
+
+    <link rel="stylesheet" href="normalize.css" />
+    <link rel="stylesheet" href="styles.css" />
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="favicon.png" type="image/x-icon" />
+</head>
+<body>
+    <main class="statistics-container">
+        <div class="header-section">
+            <h1>Статистика звернень громадян</h1>
+            <p class="description">Аналіз звернень по департаментах та управліннях</p>
+        </div>
+
+        <div class="filters-section">
+            <div class="filter-group">
+                <label for="date-from">Від:</label>
+                <input type="date" id="date-from" name="date-from">
+            </div>
+            <div class="filter-group">
+                <label for="date-to">До:</label>
+                <input type="date" id="date-to" name="date-to">
+            </div>
+            <div class="filter-group">
+                <label for="department-filter">Звернення до:</label>
+                <select id="department-filter" name="department">
+                    <option value="">Всі установи</option>
+                    <option value="apparat">Апарат</option>
+                    <option value="dep-region">Департамент регіонального розвитку</option>
+                    <option value="dep-commun">Департамент комунікацій</option>
+                    <option value="dep-build">Департамент капітального будівництва</option>
+                    <option value="dep-life">Департамент систем життєзабезпечення</option>
+                    <option value="dep-social">Департамент соціального захисту населення</option>
+                    <option value="dep-health">Департамент охорони здоров'я</option>
+                    <option value="dep-fin">Департамент фінансів</option>
+                    <option value="dep-safety">Департамент оборонної роботи</option>
+                    <option value="dep-edu">Департамент освіти і науки</option>
+                    <option value="state-arch">Державний архів Чернівецької області</option>
+                    <option value="child-service">Служба у справах дітей</option>
+                    <option value="dep-eco">Управління екології та природних ресурсів</option>
+                    <option value="dep-agro">Управління агропромислового розвитку</option>
+                    <option value="dep-culture">Управління культури</option>
+                    <option value="dep-digital">Управління цифрового розвитку</option>
+                    <option value="dep-vet">Управління з питань ветеранської політики</option>
+                    <option value="dep-population">Управління цивільного захисту населення</option>
+                    <option value="dep-sport">Управління молоді та спорту</option>
+                    <option value="legal-management">Юридичне управління</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="appeal-type">Тип звернення:</label>
+                <select id="appeal-type" name="appeal-type">
+                    <option value="">Всі типи</option>
+                    <option value="electronic">Електронні</option>
+                    <option value="written">Письмові</option>
+                </select>
+            </div>
+            <button id="apply-filters" class="btn-primary">Застосувати фільтри</button>
+            <button id="reset-filters" class="btn-secondary">Скинути</button>
+        </div>
+
+        <div class="summary-section">
+            <div class="summary-card">
+                <h3>Загальна кількість звернень</h3>
+                <div class="stat-number" id="total-appeals">0</div>
+            </div>
+            <div class="summary-card">
+                <h3>Електронні звернення</h3>
+                <div class="stat-number" id="electronic-appeals">0</div>
+            </div>
+            <div class="summary-card">
+                <h3>Письмові звернення</h3>
+                <div class="stat-number" id="written-appeals">0</div>
+            </div>
+            <div class="summary-card">
+                <h3>За обраний період</h3>
+                <div class="stat-number" id="period-appeals">0</div>
+            </div>
+        </div>
+
+        <div class="charts-section">
+            <div class="chart-container">
+                <h3>Розподіл звернень по структурних підрозділах та апарату</h3>
+                <canvas id="department-chart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3>Динаміка звернень по днях</h3>
+                <canvas id="timeline-chart"></canvas>
+            </div>
+        </div>
+
+        <div class="table-section">
+            <h3>Детальна статистика</h3>
+            <div class="table-controls">
+                <button id="export-csv" class="btn-secondary">Експорт в CSV</button>
+                <div class="search-box">
+                    <input type="text" id="table-search" placeholder="Пошук...">
+                </div>
+            </div>
+            <div class="table-container">
+                <table id="statistics-table">
+                    <thead>
+                        <tr>
+                            <th>Департамент/Управління</th>
+                            <th>Електронні</th>
+                            <th>Письмові</th>
+                            <th>Всього</th>
+                            <th>За період</th>
+                            <th>% від загальної кількості</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="loading-overlay" id="loading">
+            <div class="spinner"></div>
+            <p>Завантаження даних...</p>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
